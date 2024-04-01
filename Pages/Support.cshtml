@@ -5,22 +5,30 @@
 
 <form method="post">
     <div class="form-group">
-        <label asp-for="Issue.Name">Name</label>
-        <input asp-for="Issue.Name" class="form-control" placeholder="Enter your name" />
+        <label asp-for="CustomerInformation.Name">Name</label>
+        <input asp-for="CustomerInformation.Name" class="form-control" placeholder="Enter your name" />
     </div>
     <div class="form-group">
-        <label asp-for="Issue.Email">Email</label>
-        <input asp-for="Issue.Email" class="form-control" type="email" aria-describedby="emailHelp" placeholder="Enter email" />
+        <label asp-for="CustomerInformation.Email">Email</label>
+        <input asp-for="CustomerInformation.Email" class="form-control" type="email" aria-describedby="emailHelp" placeholder="Enter email" />
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-        <label asp-for="Issue.PhoneNumber">Phone Number</label>
-        <input asp-for="Issue.PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+        <label asp-for="CustomerInformation.PhoneNumber">Phone Number</label>
+        <input asp-for="CustomerInformation.PhoneNumber" class="form-control" placeholder="Enter your phone number" />
     </div>
     <div class="form-group">
-        <label asp-for="Issue.Message">Message</label>
-        <textarea asp-for="Issue.Message" class="form-control" placeholder="Enter your message"></textarea>
+        <label asp-for="InquiryInformation.Message">Message</label>
+        <textarea asp-for="InquiryInformation.Message" class="form-control" placeholder="Enter your message"></textarea>
     </div>
+    <div class="form-group">
+        <label asp-for="InquiryInformation.Category">Issue Type</label>
+        <select asp-for="InquiryInformation.Category" class="form-control">
+            <option value="Customer Service">Customer Service</option>
+            <option value="Repair">Repair</option>
+            <option value="Product information">Product information</option>
+            <option value="Other">Other</option>
+        </select>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

@@ -2,17 +2,27 @@ namespace CosmosDB.Models
 {
     public class Issue
     {
-        public string Id { get; set; } // Unik identifikator for hver issue
-        public string category { get; set; } // Anvendes af CosmosDB til partitionkey
+        public string Id { get; set; } = Guid.NewGuid().ToString(); // Unik identifikator for hver issue
 
-        // Kontaktinformation
+        public CustomerInformation customerInformation { get; set; } // Kundeinformation
+
+        public InquiryInformation inquiryInformation { get; set; } // Henvendelsesinformation
+        
+    }
+
+    public class CustomerInformation
+    {
+        public string CustomerId { get; set; } = Guid.NewGuid().ToString(); // Unik identifikator for hver kunde
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+    }
 
-        // Henvendelsesinformation
-        public DateTime InquiryDate { get; set; } = DateTime.Now;
+    public class InquiryInformation
+    {
+        public string InquiryId { get; set; } = Guid.NewGuid().ToString(); // Unik identifikator for hver henvendelse
         public string Message { get; set; }
-        // CategoryType er fjernet
+        public DateTime InquiryDate { get; set; } = DateTime.Now;
+        public string Category { get; set; }
     }
 }

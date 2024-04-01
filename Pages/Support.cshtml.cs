@@ -13,6 +13,10 @@ namespace CosmosDB.Pages
     {
         [BindProperty]
         public Issue Issue { get; set; }
+        [BindProperty]
+        public CustomerInformation CustomerInformation { get; set; }
+        [BindProperty]
+        public InquiryInformation InquiryInformation { get; set; }
         private readonly string _connectionString;
         private CosmosClient _cosmosClient;
         private readonly ILogger<SupportModel> _logger; // Fejlsøgning
@@ -36,31 +40,21 @@ namespace CosmosDB.Pages
         public async Task<IActionResult> OnPostAsync()
         {
 
+            // Tjek om modellen er i en gyldig tilstand
             if (!ModelState.IsValid)
             {
-                foreach (var modelState in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        _logger.LogError(error.ErrorMessage);
-                    }
-                }
+                Console.WriteLine("Modelstate is not valid");
+                return Page(); // Returnerer til samme side med valideringsfejl
             }
 
             //Opret forbindelse til Databasen
             var container = _cosmosClient.GetContainer("IbasSupportDB", "ibassupport");
 
-            //Sætter et nyt unikt id
-            Issue.Id = Guid.NewGuid().ToString(); 
-
-            //Bruger den korrekte property som partition key
-            var partitionKey = new PartitionKey(Issue.category); 
-
             //Indsætter item i Cosmos DB
-            await container.UpsertItemAsync(Issue, partitionKey); 
+            await container.UpsertItemAsync(Issue);
 
             //Redirecter til index 
-            return RedirectToPage("/Index"); 
+            return RedirectToPage("/Index");
         }
 
     }
